@@ -115,7 +115,7 @@ linear-gradient(135deg,#102d50,#203f65 45%,#0a172a);color:#d8e4f1}
 <div class="eyebrow">THE LAST RECORD</div><h2 class="section-title">One Last Thing.</h2>
 <div class="last">
 <div class="video-placeholder"><div><strong>FAREWELL VIDEO</strong><small>INSERT YOUR FINAL VIDEO HERE</small></div></div>
-<div class="letter"><div class="stamp">UNSENT LETTERS · TBM CHRESTOTES</div><h3>Some things were never said.</h3><p>Dear Chrestotes,</p><p>This is the place for the words we never managed to say between meetings, events, deadlines, and all the ordinary moments that somehow became unforgettable.</p><p>Replace this draft with your final farewell letter.</p><p><i>— with love, from the four of us</i></p></div>
+<div class="letter"><div class="stamp">UNSENT LETTERS · TBM CHRESTOTES</div><h3>Some things were never said.</h3><p>Dear Chrestotes,</p><p>We problaby never said enough about the little moments. The jokes after meetings. The people who stayed late. The days that felt ordinary until we realized they were the memories we would miss.</p><p>Together be loyal as TBM Family.</p><p><i>— with love, from the four of us</i></p></div>
 <div class="endbuttons"><button onclick="go('home')">HOME · RETURN TO RECORD</button><button onclick="go('sideA')">REPLAY · START AGAIN</button></div>
 </div>
 </section>
@@ -173,8 +173,7 @@ const modal=document.getElementById('memberModal'), lockView=document.getElement
 function openMember(i,name){memberIndex=i;document.getElementById('lockName').textContent=name;document.getElementById('privateName').textContent=name;document.getElementById('memberPw').value='';document.getElementById('pwError').textContent='';lockView.style.display='block';privateView.classList.remove('open');privateMessage.classList.remove('revealed');privateAudio.pause();privateAudio.currentTime=0;privateVinyl.classList.remove('spinning');modal.classList.add('open')}
 function closeMember(){privateAudio.pause();modal.classList.remove('open')}
 function unlockMember(){const expected='CHRESTOTES'+String(memberIndex).padStart(2,'0');if(document.getElementById('memberPw').value===expected){lockView.style.display='none';privateView.classList.add('open')}else document.getElementById('pwError').textContent='Password salah. Coba lagi.'}
-async function playPrivate(){try{await privateAudio.play()}catch(e){alert('Audio tidak dapat diputar. Pastikan file audio berada di folder audio/.')}}
-privateAudio.onplay=()=>{privateVinyl.classList.add('spinning');document.getElementById('privatePlay').textContent='❚❚ PAUSE RECORD';privateMessage.classList.add('revealed')};
+async function playPrivate(){try{if(privateAudio.paused){await privateAudio.play()}else privateAudio.pause()}catch(e){alert('Audio tidak dapat diputar. Pastikan file audio berada di folder audio/.')}}privateAudio.onplay=()=>{privateVinyl.classList.add('spinning');document.getElementById('privatePlay').textContent='❚❚ PAUSE RECORD';privateMessage.classList.add('revealed')};
 privateAudio.onpause=()=>{privateVinyl.classList.remove('spinning');document.getElementById('privatePlay').textContent='▶ PLAY RECORD'};
 privateAudio.onended=()=>{privateVinyl.classList.remove('spinning');document.getElementById('privatePlay').textContent='▶ PLAY RECORD'};
 function fmt(sec){sec=Math.floor(sec);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
